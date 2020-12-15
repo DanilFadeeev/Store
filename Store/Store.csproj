@@ -5,8 +5,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Migrations\0001CreateUsersTable.sql" />
+    <None Remove="Data\Migrations\0002CreateRolesTable.sql" />
+    <None Remove="Data\Migrations\0003CreateUserRoleTable.sql" />
+    <None Remove="Data\Migrations\0004CreateProductsTable.sql" />
+    <None Remove="Data\Migrations\0005CreateCategoriesTable.sql" />
+    <None Remove="Data\Migrations\0006CreateProductCategoryTable.sql" />
+    <None Remove="Data\Migrations\0007AddUsersConstraints.sql" />
+    <None Remove="Data\Migrations\0008AddUsersConstraints.sql" />
+    <None Remove="Data\Migrations\0009AddRolesConstraints.sql" />
+    <None Remove="Data\Migrations\0010AddRolesConstraints.sql" />
+    <None Remove="Data\Migrations\0011AddUserRoleConstraints.sql" />
+    <None Remove="Data\Migrations\0012AddUserRoleConstraints.sql" />
+    <None Remove="Data\Migrations\0013AddCategoriesConstraints.sql" />
+    <None Remove="Data\Migrations\0014AddCategoriesConstraints.sql" />
+    <None Remove="Data\Migrations\0015AddProductsConstraints.sql" />
+    <None Remove="Data\Migrations\0016AddProductsConstraints.sql" />
+    <None Remove="Data\Migrations\0017AddProductCategoryConstraints.sql" />
+    <None Remove="Data\Migrations\0018AddProductCategoryConstraints.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Migrations\0001CreateUsersTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0002CreateRolesTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0003CreateUserRoleTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0004CreateProductsTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0005CreateCategoriesTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0006CreateProductCategoryTable.sql" />
+    <EmbeddedResource Include="Data\Migrations\0008AddUsersConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0007AddUsersConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0010AddRolesConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0009AddRolesConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0012AddUserRoleConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0011AddUserRoleConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0014AddCategoriesConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0013AddCategoriesConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0016AddProductsConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0015AddProductsConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0018AddProductCategoryConstraints.sql" />
+    <EmbeddedResource Include="Data\Migrations\0017AddProductCategoryConstraints.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\Migrations\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Utils\" />
@@ -17,6 +58,7 @@
     <PackageReference Include="bootstrap" Version="4.5.3" />
     <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="dbup-core" Version="4.5.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
   </ItemGroup>
 
 </Project>
