@@ -46,14 +46,10 @@
     <EmbeddedResource Include="Data\Migrations\0017AddProductCategoryConstraints.sql" />
   </ItemGroup>
 
-  <ItemGroup>
+    <ItemGroup>
     <Folder Include="Controllers\" />
-
-    <Folder Include="Models\" />
-
     <Folder Include="Data\Migrations\" />
-
-    <Folder Include="wwwroot\" />
+    <Folder Include="Models\" />
     <Folder Include="Utils\" />
     <Folder Include="Views\" />
   </ItemGroup>

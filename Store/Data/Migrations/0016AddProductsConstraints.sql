@@ -11,3 +11,4 @@ alter table Products
 add constraint FK_Users_Products 
 foreign key(UserId) 
 references Users(UserId)
+on delete cascade;
