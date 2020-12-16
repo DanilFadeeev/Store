@@ -6,3 +6,6 @@ alter column Email nvarchar(100) not null;
 
 alter table Users
 alter column UserName nvarchar(50) not null;
+
+alter table Users 
+alter column PasswordHash nvarchar(100) not null;

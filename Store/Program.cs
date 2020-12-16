@@ -1,22 +1,22 @@
-using Microsoft.AspNetCore.Hosting;
+using DbUp;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Store;
 using Store.Data;
+using Store.Models;
+using Store.tests;
+using System;
+using System.Reflection;
 
-var c = new IdentityOptions();
+
+DbTests.Run();
+
+//CreateHostBuilder(args).Build().Run();
 
 
-CreateHostBuilder(args).Build().Run();
-        
+//static IHostBuilder CreateHostBuilder(string[] args) =>
+//    Host.CreateDefaultBuilder(args)
+//        .ConfigureWebHostDefaults(webBuilder =>
+//        {
+//            webBuilder.UseStartup<Startup>();
+//        });
 
-static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        });
-    
 

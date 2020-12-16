@@ -1,5 +1,4 @@
-﻿
-alter table Users
+﻿alter table Users
 add primary key(UserId);
 
 alter table Users

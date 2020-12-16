@@ -10,12 +10,14 @@ on UserRole (RoleId);
 alter table UserRole
 add constraint FK_Users_UserRole 
 foreign key(UserId)
-references Users(UserId);
+references Users(UserId)
+on delete cascade;
 
 alter table UserRole
 add constraint FK_Roles_UserRole 
 foreign key(RoleId)
-references Roles(Id);
+references Roles(Id)
+on delete cascade;
 
 alter table UserRole
 add primary key (UserId, RoleId)
