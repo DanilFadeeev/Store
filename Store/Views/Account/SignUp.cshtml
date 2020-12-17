@@ -1,0 +1,35 @@
+﻿
+@model SignUpData
+@{ Layout = "MinimalLayout";}
+<div class="container">
+    <div class="header">
+        <h2>Create Account</h2>
+    </div>
+    <form id="form" class="form" method="post">
+        <div class="form-control">
+            <label asp-for="Name">Username</label>
+            <input type="text" placeholder="florinpop17" id="username" asp-for="Name" />
+        </div>
+        <div class="form-control">
+            <label asp-for="Email">Email</label>
+            <input type="email" placeholder="a@florin-pop.com" id="email" asp-for="Email" />
+        </div>
+        <div class="form-control">
+            <label asp-for="Phone">Pone</label>
+            <input type="text" placeholder="+78005553535" id="PhoneNumber" asp-for="Phone" />
+        </div>
+        <div class="form-control">
+            <label asp-for="Password">Password</label>
+            <input type="password" placeholder="Password" id="password" asp-for="Password" />
+        </div>
+        <div class="form-control">
+            <label asp-for="ConfirmPassword">Password check</label>
+            <input type="password" placeholder="Password two" id="password2" asp-for="ConfirmPassword" />
+        </div>
+        <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]" />
+
+        <button>Submit</button>
+    </form>
+</div>
+
+

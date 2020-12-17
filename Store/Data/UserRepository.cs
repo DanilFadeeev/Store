@@ -19,14 +19,16 @@ namespace Store.Data
 {
     //TODO: change connectionstring name ShopTest to Shop
     public class UserRepository : IUserStore<User>, IUserEmailStore<User>, IRoleStore<Role>, IUserPasswordStore<User>, IUserPhoneNumberStore<User>,
-    IUserTwoFactorStore<User>
+    IUserTwoFactorStore<User>, IUserRoleStore<User>
     {
         public string ConnectionString { get; set; }
 
-        //public UserRepository(IConfiguration configuration)
-        //{
-        //    ConnectionString = configuration.GetConnectionString("ShopTest");
-        //}
+        public UserRepository(IConfiguration configuration = null)
+        {
+            ConnectionString = configuration.GetConnectionString("ShopTest");
+            if (ConnectionString is null)
+                ConnectionString = "server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true";
+        }
         public async Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken)
         {
             ValidationContext context = new(user);
@@ -44,16 +46,24 @@ namespace Store.Data
 
         public async Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var Id = await conn.QuerySingleAsync<string>("Select UserId from Users where Email = @Email", user);
-            return Id;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var Id = await conn.QuerySingleAsync<string>("Select UserId from Users where Email = @Email", user);
+                return Id;
+            }
+            catch { return user.UserId; }
         }
 
         public async Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var name = await conn.QuerySingleAsync<string>("Select UserName from Users where Email = @Email", user);
-            return name;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var name = await conn.QuerySingleAsync<string>("Select UserName from Users where Email = @Email", user);
+                return name;
+            }
+            catch { return user.UserName; }
         }
 
         public async Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
@@ -92,16 +102,24 @@ namespace Store.Data
 
         public async Task<User> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserId = '{userId}'");
-            return user;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserId = '{userId}'");
+                return user;
+            }
+            catch { return null; }
         }
 
         public async Task<User> FindByNameAsync(string userName, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserName = '{userName}'");
-            return user;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserName = '{userName}'");
+                return user;
+            }
+            catch { return null; }
         }
 
         public void Dispose()
@@ -118,9 +136,13 @@ namespace Store.Data
 
         public async Task<string> GetEmailAsync(User user, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var name = await conn.QuerySingleAsync<string>("Select Email from Users where UserName = @UserName", user);
-            return name;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var name = await conn.QuerySingleAsync<string>("Select Email from Users where UserName = @UserName", user);
+                return name;
+            }
+            catch { return user.Email; }
         }
 
         public async Task<bool> GetEmailConfirmedAsync(User user, CancellationToken cancellationToken)
@@ -138,7 +160,7 @@ namespace Store.Data
         public async Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where Email = '{normalizedEmail}'");
+            var user = await conn.QuerySingleAsync<User>($"Select UserId, Email, PhoneNumber,UserName, PasswordHash as Password from Users where Email = '{normalizedEmail}'");
             return user;
         }
 
@@ -289,6 +311,51 @@ namespace Store.Data
         public Task<bool> GetTwoFactorEnabledAsync(User user, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+
+
+
+        public async Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            using SqlConnection conn = new(ConnectionString);
+            Role role = await ((IRoleStore<Role>)this).FindByNameAsync(roleName, cancellationToken);
+            await conn.ExecuteAsync($"Insert into UserRole values('{user.UserId}','{role.Id}');");
+        }
+
+        public async Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            using SqlConnection conn = new(ConnectionString);
+            Role role = await ((IRoleStore<Role>)this).FindByNameAsync(roleName, cancellationToken);
+            await conn.ExecuteAsync($"delete from UserRole where UserId='{user.UserId}' and RoleId='{role.Id}'");
+        }
+
+        public async Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
+        {
+            using SqlConnection conn = new(ConnectionString);
+            string sql = $"select name from Roles join UserRole on Roles.id = UserRole.RoleId and UserRole.UserId = '{user.UserId}'";
+            var result = (await conn.QueryAsync<string>(sql)).ToList() ;
+            return result;
+        }
+
+        public async Task<bool> IsInRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            var userRoles = await GetRolesAsync(user,cancellationToken);
+            foreach (var r in userRoles)
+                if (r == roleName)
+                    return true;
+            return false;
+        }
+
+        public async Task<IList<User>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            using SqlConnection conn = new(ConnectionString);
+            Role role = await ((IRoleStore<Role>)this).FindByNameAsync(roleName, cancellationToken);
+            string sql = $@"select Users.UserId, Email, PhoneNumber, UserName, PasswordHash as Password from Users 
+                            join UserRole
+                        on Users.UserId = UserRole.UserId and UserRole.RoleId = '{role.Id}'";
+            var result = (await conn.QueryAsync<User>(sql)).ToList();
+            return result;
         }
     }
 }
