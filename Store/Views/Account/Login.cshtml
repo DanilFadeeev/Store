@@ -1,41 +1,22 @@
-﻿
+﻿@model SignInData
 @{ Layout = "MinimalLayout";}
 <div class="container">
     <div class="header">
-        <h2>Create Account</h2>
+        <h2>Log In</h2>
     </div>
-    <form id="form" class="form">
+    <form id="form" class="form" method="post">
+        
         <div class="form-control">
-            <label for="username">Username</label>
-            <input type="text" placeholder="florinpop17" id="username" />
+            <label asp-for="Email">Email</label>
+            <input type="email" placeholder="a@florin-pop.com" asp-for="Email" email required />
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
+       
         <div class="form-control">
-            <label for="email">Email</label>
-            <input type="email" placeholder="a@florin-pop.com" id="email" />
-            <i class="fas fa-check-circle"></i>
-            <i class="fas fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div>
-        <div class="form-control">
-            <label for="PhoneNumber">Email</label>
-            <input type="text" placeholder="+78005553535" id="PhoneNumber" />
-            <i class="fas fa-check-circle"></i>
-            <i class="fas fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div>
-        <div class="form-control">
-            <label for="password">Password</label>
-            <input type="password" placeholder="Password" id="password" />
-            <i class="fas fa-check-circle"></i>
-            <i class="fas fa-exclamation-circle"></i>
-            <small>Error message</small>
-        </div>
-        <div class="form-control">
-            <label for="password2">Password check</label>
-            <input type="password" placeholder="Password two" id="password2" />
+            <label asp-for="Password">Password</label>
+            <input type="password" placeholder="Password" asp-for="Password" required/>
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
@@ -43,5 +24,3 @@
         <button>Submit</button>
     </form>
 </div>
-
-

@@ -11,14 +11,14 @@ namespace Store.Controllers
 {
     public class AccountController : Controller
     {
+        public UserManager<User> UserManager { get; }
+        public SignInManager<User> SignInManager { get; }
+
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
-        public UserManager<User> UserManager { get; }
-        public SignInManager<User> SignInManager { get; }
 
         public async Task<IActionResult> Login(string returnUrl = null)
         {
