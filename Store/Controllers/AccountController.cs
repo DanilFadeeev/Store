@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Store.Data.DTO;
 using Store.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Store.Utils;
 using System.Threading.Tasks;
 
 namespace Store.Controllers
@@ -22,15 +24,48 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            User test = new() { UserId = "a", Email = "email@.com", PhoneNumber = "12344312", UserName = "Name", Password = "strongPass!" };
-            await SignInManager.SignInAsync(test, false) ;
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Login(SignInData data, string returnUrl = null)
+        {
+            ViewData["returnUrl"] = returnUrl;
+            if (!ModelState.IsValid)
+                return View();
+
+            User corr = await UserManager.FindByEmailAsync(data.Email);
+            if (corr.Password == data.Password)
+            {
+                await SignInManager.SignInAsync(corr, false);
+                return Redirect(returnUrl ?? "/");
+            }
+            return View();
+
+        }
+        public async Task<IActionResult> SignUp(string returnUrl = null)
+        {
+            ViewData["returnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp( SignUpData data, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+         var res =   await UserManager.CreateAsync(data.ToUser());
+
+            return Redirect(returnUrl?? "/");
+        }
+
         [Authorize(Roles = "admin")]
         public string Secret()
         {
             return "this is a secret page for admins";
         }
+
         [Authorize(Roles = "god user")]
         public string God()
         {

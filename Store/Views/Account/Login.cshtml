@@ -1,20 +1,22 @@
 ﻿@model SignInData
+
 @{ Layout = "MinimalLayout";}
 <div class="container">
     <div class="header">
         <h2>Log In</h2>
     </div>
-    <form id="form" class="form" method="post">
-        
+    <form id="form" class="form" method="post" asp-route-returnUrl="">
+
         <div class="form-control">
             <label asp-for="Email">Email</label>
             <input type="email" placeholder="a@florin-pop.com" asp-for="Email" email required />
         </div>
-       
+
         <div class="form-control">
             <label asp-for="Password">Password</label>
-            <input type="password" placeholder="Password" asp-for="Password" required/>
+            <input type="password" placeholder="Password" asp-for="Password" required />
         </div>
+        <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]" />
         <button>Submit</button>
     </form>
 </div>

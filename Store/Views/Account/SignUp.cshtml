@@ -8,7 +8,7 @@
     <form id="form" class="form" method="post">
         <div class="form-control">
             <label asp-for="Name">Username</label>
-            <input type="text" placeholder="florinpop17" id="username" asp-for="Name"/>
+            <input type="text" placeholder="florinpop17" id="username" asp-for="Name" />
         </div>
         <div class="form-control">
             <label asp-for="Email">Email</label>
@@ -16,16 +16,18 @@
         </div>
         <div class="form-control">
             <label asp-for="Phone">Pone</label>
-            <input type="text" placeholder="+78005553535" id="PhoneNumber"asp-for="Phone" />
+            <input type="text" placeholder="+78005553535" id="PhoneNumber" asp-for="Phone" />
         </div>
         <div class="form-control">
             <label asp-for="Password">Password</label>
-            <input type="password" placeholder="Password" id="password" asp-for="Password"/>
+            <input type="password" placeholder="Password" id="password" asp-for="Password" />
         </div>
         <div class="form-control">
             <label asp-for="ConfirmPassword">Password check</label>
             <input type="password" placeholder="Password two" id="password2" asp-for="ConfirmPassword" />
         </div>
+        <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]" />
+
         <button>Submit</button>
     </form>
 </div>

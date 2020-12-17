@@ -52,7 +52,7 @@ namespace Store.Data
                 var Id = await conn.QuerySingleAsync<string>("Select UserId from Users where Email = @Email", user);
                 return Id;
             }
-            catch { return ""; }
+            catch { return user.UserId; }
         }
 
         public async Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
@@ -63,7 +63,7 @@ namespace Store.Data
                 var name = await conn.QuerySingleAsync<string>("Select UserName from Users where Email = @Email", user);
                 return name;
             }
-            catch { return ""; }
+            catch { return user.UserName; }
         }
 
         public async Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
@@ -102,16 +102,24 @@ namespace Store.Data
 
         public async Task<User> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserId = '{userId}'");
-            return user;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserId = '{userId}'");
+                return user;
+            }
+            catch { return null; }
         }
 
         public async Task<User> FindByNameAsync(string userName, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserName = '{userName}'");
-            return user;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var user = await conn.QuerySingleAsync<User>($"Select * from Users where UserName = '{userName}'");
+                return user;
+            }
+            catch { return null; }
         }
 
         public void Dispose()
@@ -134,7 +142,7 @@ namespace Store.Data
                 var name = await conn.QuerySingleAsync<string>("Select Email from Users where UserName = @UserName", user);
                 return name;
             }
-            catch { return ""; }
+            catch { return user.Email; }
         }
 
         public async Task<bool> GetEmailConfirmedAsync(User user, CancellationToken cancellationToken)
@@ -152,7 +160,7 @@ namespace Store.Data
         public async Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select * from Users where Email = '{normalizedEmail}'");
+            var user = await conn.QuerySingleAsync<User>($"Select UserId, Email, PhoneNumber,UserName, PasswordHash as Password from Users where Email = '{normalizedEmail}'");
             return user;
         }
 
