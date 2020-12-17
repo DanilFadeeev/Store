@@ -60,16 +60,5 @@ namespace Store.Controllers
             return Redirect(returnUrl?? "/");
         }
 
-        [Authorize(Roles = "admin")]
-        public string Secret()
-        {
-            return "this is a secret page for admins";
-        }
-
-        [Authorize(Roles = "god user")]
-        public string God()
-        {
-            return "this is a secret page for owner";
-        }
     }
 }
