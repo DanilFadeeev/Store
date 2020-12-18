@@ -14,5 +14,6 @@ namespace Store.Models
         public string SalerId { get; set; }
         public User Saler { get; set; }
         public string Category { get; set; }
+        public string Image { get; set; }
     }
 }
