@@ -1,0 +1,37 @@
+﻿@model Notebook 
+@{
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">parametr</th>
+            <th scope="col">value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">model</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th scope="row">Cores</th>
+            <td>@Model.Cores</td>
+        </tr>
+        <tr>
+            <th scope="row">resolution</th>
+            <td>@Model.Resolution</td>
+        </tr>
+        <tr>
+            <th scope="row">video card</th>
+            <td>@Model.VideoCard</td>
+        </tr>
+        <tr>
+            <th scope="row">monitor size</th>
+            <td>@Model.ScreenSize</td>
+        </tr>
+        <tr>
+            <th scope="row">description</th>
+            <td>@Model.Description</td>
+        </tr>
+    </tbody>
+</table>
