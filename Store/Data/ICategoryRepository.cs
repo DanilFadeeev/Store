@@ -8,7 +8,7 @@ namespace Store.Data
     public interface ICategoryRepository
     {
         Task<List<string>> AllCategories();
-        Task<List<string>> GetChildCategories(string category);
+        Task<List<string>> GetChildrenCategories(string category);
          /// <summary>
          /// check if category have concrete parent
          /// </summary>
