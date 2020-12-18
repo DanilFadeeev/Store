@@ -35,7 +35,7 @@ namespace Store
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<IUserStore<User>, UserRepository>();
             services.AddTransient<IRoleStore<Role>, UserRepository>();
             services.AddSingleton<IConnectionStringProvider, TestConnectionStringProvider>();
