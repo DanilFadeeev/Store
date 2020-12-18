@@ -46,6 +46,9 @@
     <None Remove="Data\Migrations\0016AddProductsConstraints.sql" />
     <None Remove="Data\Migrations\0017AddProductCategoryConstraints.sql" />
     <None Remove="Data\Migrations\0018AddProductCategoryConstraints.sql" />
+    <None Remove="Data\Migrations\0019AddParentCategoryColumnToCategories.sql" />
+    <None Remove="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
+    <None Remove="Data\Migrations\0021AddColumnsToProductsTable.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,11 +70,9 @@
     <EmbeddedResource Include="Data\Migrations\0015AddProductsConstraints.sql" />
     <EmbeddedResource Include="Data\Migrations\0018AddProductCategoryConstraints.sql" />
     <EmbeddedResource Include="Data\Migrations\0017AddProductCategoryConstraints.sql" />
-  </ItemGroup>
-
-    <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-    <Folder Include="Models\" />
+    <EmbeddedResource Include="Data\Migrations\0019AddParentCategoryColumnToCategories.sql" />
+    <EmbeddedResource Include="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
+    <EmbeddedResource Include="Data\Migrations\0021AddColumnsToProductsTable.sql" />
   </ItemGroup>
 
   <ItemGroup>

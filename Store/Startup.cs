@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.Data;
 using Store.Models;
+using Store.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,8 @@ namespace Store
             services.AddControllersWithViews();
             services.AddTransient<IUserStore<User>, UserRepository>();
             services.AddTransient<IRoleStore<Role>, UserRepository>();
+            services.AddSingleton<IConnectionStringProvider, TestConnectionStringProvider>();
+            services.AddSingleton<ICategoryTreeProvider, CategoryTreeProvider>();
 
             services.AddIdentity<User, Role>()
                 .AddDefaultTokenProviders();
