@@ -48,6 +48,7 @@
     <None Remove="Data\Migrations\0018AddProductCategoryConstraints.sql" />
     <None Remove="Data\Migrations\0019AddParentCategoryColumnToCategories.sql" />
     <None Remove="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
+    <None Remove="Data\Migrations\0021AddColumnsToProductsTable.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +72,7 @@
     <EmbeddedResource Include="Data\Migrations\0017AddProductCategoryConstraints.sql" />
     <EmbeddedResource Include="Data\Migrations\0019AddParentCategoryColumnToCategories.sql" />
     <EmbeddedResource Include="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
+    <EmbeddedResource Include="Data\Migrations\0021AddColumnsToProductsTable.sql" />
   </ItemGroup>
 
   <ItemGroup>
