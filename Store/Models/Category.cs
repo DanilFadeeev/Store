@@ -10,5 +10,7 @@ namespace Store.Models
         public string Name { get; set; }
         public int Id { get; set; }
         public int ParentCagegory { get; set; }
+        public Category Parent { get; set; }
+        public List<Category> Children { get; set; }
     }
 }
