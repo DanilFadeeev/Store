@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Store.Data;
 using Store.Models;
+using Store.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,25 @@ namespace Store.tests
 
             var scripts = upgrader.GetScriptsToExecute();
             var result = upgrader.PerformUpgrade();
+
+
+            var testResult = new CategoryRepository(new csp(), new CategoryTreeProvider(new csp())).AllCategories().Result;
+
+            foreach (var cc in testResult)
+                Console.WriteLine(cc);
+
+            User tests = new() { UserId = "a", UserName = "a" };
+            //new UserRepository().AddToRoleAsync(test, "con",new()).Wait();
+
+            var roles = new UserRepository().GetRolesAsync(tests, new()).Result;
+
+            foreach (var i in roles)
+                Console.WriteLine(i);
+
+
+            var users = new UserRepository().GetUsersInRoleAsync("god user", new()).Result;
+            foreach (var us in users)
+                Console.WriteLine(us.Email + " " + us.UserName);
 
             if (!result.Successful)
             {
@@ -51,8 +71,8 @@ namespace Store.tests
             Console.WriteLine("created role id: " + store.FindByNameAsync("test", new()).Result.Id);
             test = store.FindByNameAsync("test", new()).Result;
 
-            Console.WriteLine("change Role name to Admin...");
-            store.SetRoleNameAsync(test, "Admin", new()).Wait();
+            //Console.WriteLine("change Role name to Admin...");
+            //store.SetRoleNameAsync(test, "Admin", new()).Wait();
 
             Console.WriteLine("Find Role by Id");
             Console.WriteLine("Changed role Name:  " + store.FindByIdAsync(test.Id, new()).Result.Name);
@@ -127,11 +147,11 @@ namespace Store.tests
             User user1 = new() { Email = "PasswordTEst@mail.ru", PhoneNumber = "71002348-5325", UserName = "PasswordMan", Password = "Default" };
             IUserPasswordStore<User> repo1 = new UserRepository() { ConnectionString = connectionString };
 
-            var res = repo1.CreateAsync(user1,
-            new()).Result;
+            //var res = repo1.CreateAsync(user1,
+            //new()).Result;
 
 
-            Console.WriteLine(res);
+            //Console.WriteLine(res);
             Console.WriteLine("Users first passowrd: ");
             Console.WriteLine(repo1.GetPasswordHashAsync(user1,new()).Result);
 
@@ -141,6 +161,27 @@ namespace Store.tests
             Console.WriteLine("show new password");
             Console.WriteLine(repo1.GetPasswordHashAsync(user1,new()).Result);
 
+            var ctp = new CategoryTreeProvider(new csp());
+            var all = new CategoryRepository(new csp(), ctp).AllCategories().Result;
+            var allProductchilds = new CategoryRepository(new csp(), ctp).GetChildrenCategories("product").Result;
+            var allConcreteProductChilds = new CategoryRepository(new csp(), ctp).GetNotAbstractChildren("product").Result;
+            Console.WriteLine("write all categories names");
+            foreach (var i in all)
+                Console.WriteLine(i);
+            Console.WriteLine("write all childrens of product");
+            foreach (var i in allProductchilds)
+                Console.WriteLine(i);
+            Console.WriteLine("write all concrete childrens of product");
+
+            foreach (var i in allConcreteProductChilds)
+                Console.WriteLine(i);
+
+
+
+        }
+        class csp : IConnectionStringProvider
+        {
+            public string ConnectionString => "server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true";
         }
     }
 }
