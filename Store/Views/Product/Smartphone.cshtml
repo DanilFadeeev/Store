@@ -1,0 +1,34 @@
+﻿@model Smartphone
+@{
+    Layout = "MinimalLayout";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">parametr</th>
+            <th scope="col">value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">model</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th scope="row">Cores</th>
+            <td>@Model.Cores</td>
+        </tr>
+        <tr>
+            <th scope="row">resolution</th>
+            <td>@Model.Resolution</td>
+        </tr>
+        <tr>
+            <th scope="row">battery volume</th>
+            <td>@Model.BatteryVolume mah</td>
+        </tr>
+        <tr>
+            <th scope="row">corpus type</th>
+            <td>@Model.CorpusType</td>
+        </tr>
+    </tbody>
+</table>

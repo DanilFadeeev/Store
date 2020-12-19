@@ -159,9 +159,13 @@ namespace Store.Data
 
         public async Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
-            using SqlConnection conn = new(ConnectionString);
-            var user = await conn.QuerySingleAsync<User>($"Select UserId, Email, PhoneNumber,UserName, PasswordHash as Password from Users where Email = '{normalizedEmail}'");
-            return user;
+            try
+            {
+                using SqlConnection conn = new(ConnectionString);
+                var user = await conn.QuerySingleAsync<User>($"Select UserId, Email, PhoneNumber,UserName, PasswordHash as Password from Users where Email = '{normalizedEmail}'");
+                return user;
+            }
+            catch { return null; }
         }
 
         public async Task<string> GetNormalizedEmailAsync(User user, CancellationToken cancellationToken)

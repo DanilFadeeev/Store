@@ -32,15 +32,15 @@ namespace Store.Controllers
         {
             ViewData["returnUrl"] = returnUrl;
             if (!ModelState.IsValid)
-                return View();
+                return View(data);
 
             User corr = await UserManager.FindByEmailAsync(data.Email);
-            if (corr.Password == data.Password)
+            if (corr?.Password == data?.Password)
             {
                 await SignInManager.SignInAsync(corr, false);
                 return Redirect(returnUrl ?? "/");
             }
-            return View();
+            return View(data);
 
         }
         public async Task<IActionResult> SignUp(string returnUrl = null)

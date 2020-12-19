@@ -5,11 +5,12 @@
     <div class="header">
         <h2>Log In</h2>
     </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <form id="form" class="form" method="post" asp-route-returnUrl="">
 
         <div class="form-control">
             <label asp-for="Email">Email</label>
-            <input type="email" placeholder="a@florin-pop.com" asp-for="Email" email required />
+            <input type="email" placeholder="a@florin-pop.com" asp-for="Email" required />
         </div>
 
         <div class="form-control">

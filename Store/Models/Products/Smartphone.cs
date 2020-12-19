@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Store.Models.Products
 {
-    public class Smartphone
+    public class Smartphone:Electronics
     {
         public string Resolution { get; set; }
         public int Cores { get; set; }
