@@ -9,10 +9,10 @@ namespace Store.Data.DTO
 {
     public class SignInData
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="please enter email")]
+        [EmailAddress(ErrorMessage = "please enter correct email")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "please enter a password")]
         public string Password { get; set; }
 
     }

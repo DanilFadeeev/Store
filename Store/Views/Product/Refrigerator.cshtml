@@ -1,0 +1,39 @@
+﻿@model Refrigerator
+@{
+    Layout = "MinimalLayout";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">parametr</th>
+            <th scope="col">value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">model</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th scope="row">color</th>
+            <td>@Model.Color</td>
+        </tr>
+        <tr>
+            <th scope="row">length</th>
+            <td>@Model.LengthMm</td>
+        </tr>
+        <tr>
+            <th scope="row">width</th>
+            <td>@Model.WidthMm</td>
+        </tr>
+        <tr>
+            <th scope="row">height</th>
+            <td>@Model.HeightMm</td>
+        </tr>
+        <tr>
+            <th scope="row">volume liters</th>
+            <td>@Model.VolumeLiters</td>
+        </tr>
+    </tbody>
+</table>
