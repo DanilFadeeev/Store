@@ -1,0 +1,53 @@
+﻿@model MeatGrinderData
+@{
+}
+<form asp-action="AddProduct" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="productType" value="meatGrinder" />
+    <input type="hidden" name="category" value="meatGrinder" />
+    <div class="form-group">
+        <div>
+            <label asp-for="Brand" class="col-form-label">Brand: </label>
+        </div>
+        <input type="text" asp-for="Brand" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="Cost" class="col-form-label">Cost: </label>
+
+        <input type="text" asp-for="Cost" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="Country" class="col-form-label">made in: </label>
+
+        <input type="text" asp-for="Country" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="Name" class="col-form-label">Model: </label>
+
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="WeightInGrams" class="col-form-label">Weight: </label>
+
+        <input type="text" asp-for="WeightInGrams" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="ImageFile" class="col-form-label">Weight: </label>
+
+        <input type="text" asp-for="ImageFile" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="Description" class="col-form-label">Weight: </label>
+
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+
+    <div>
+        <input type="submit" value="Publish" class="btn btn-primary" />
+    </div>
+</form>
