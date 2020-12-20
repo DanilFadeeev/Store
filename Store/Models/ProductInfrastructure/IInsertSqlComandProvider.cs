@@ -7,6 +7,6 @@ namespace Store.Models.ProductInfrastructure
 {
     public interface IInsertSqlComandProvider
     {
-        string Command { get; }
+        string GetCommand(object data);
     }
 }
