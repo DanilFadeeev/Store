@@ -35,9 +35,6 @@ namespace Store.Models
             List<Category> Ctg = conn.Query<Category>("Select * from categories").ToList();
             foreach (var i in Ctg)
             {
-                Console.WriteLine(i.Id);
-                Console.WriteLine(i.Name);
-                Console.WriteLine(i.ParentCategory);
 
                 tree[i.Id] = i;
 

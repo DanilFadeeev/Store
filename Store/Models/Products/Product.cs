@@ -7,6 +7,7 @@ namespace Store.Models
 {
     public class Product
     {
+        static public string ProductName { get; set; } = "Product";
         public int Id { get; set; }
         public int Cost { get; set; }
         public string Name { get; set; }
@@ -14,5 +15,6 @@ namespace Store.Models
         public string SalerId { get; set; }
         public User Saler { get; set; }
         public string Category { get; set; }
+        public string Image { get; set; }
     }
 }

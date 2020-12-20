@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Store.Data;
+using Store.Models;
 using Store.Models.Products;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,12 @@ namespace Store.Controllers
 {
     public class ProductController : Controller
     {
+        public ICategoryRepository CategoryRepo { get; }
+
+        public ProductController(ICategoryRepository categoryRepo)
+        {
+            CategoryRepo = categoryRepo;
+        }
         public IActionResult MeatGrinder()
         {
             MeatGrinder model = new()
@@ -72,5 +81,18 @@ namespace Store.Controllers
             };
             return View(model);
         }
+        public async Task<IActionResult> AddProduct(string productType = null)
+        {
+            var types = await CategoryRepo.GetNotAbstractChildren("product");
+            ViewData["productType"] = productType;
+            return View(types);
+        }
+        [HttpPost]
+         public IActionResult addproduct(IFormCollection data)
+        {
+             //new ProductRepository().GetProducts<Product>("a");
+            return View();
+        }
+    
     }
 }

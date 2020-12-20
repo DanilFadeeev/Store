@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Store.Models.Products
 {
-    public class Appliance: Product
+    public class Appliance : Product
     {
+        static string Category;
         public int PowerInWatt { get; set; }
         public string Brand { get; set; }
     }
