@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Store.Models.ProductInfrastructure
 {
-    interface ISaver
+    public interface IProductSaver
     {
         void Save(IFormCollection data );
     }
