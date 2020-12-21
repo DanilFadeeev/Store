@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.Data;
 using Store.Models;
+using Store.Models.ProductInfrastructure;
 using Store.Utils;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,10 @@ namespace Store
             services.AddSingleton<IConnectionStringProvider, TestConnectionStringProvider>();
             services.AddSingleton<ICategoryTreeProvider, CategoryTreeProvider>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<IFormCollectionMapper, Mapper>();
+            services.AddSingleton<IProductSaver, ProductSaver>();
+            services.AddSingleton<IInsertSqlComandProvider, InsertSqlComandProvider>();
+            services.AddSingleton<IProductPhotoSaver, ProductPhotoSaver>();
 
             services.AddIdentity<User, Role>()
                 .AddDefaultTokenProviders();

@@ -81,18 +81,7 @@ namespace Store.Controllers
             };
             return View(model);
         }
-        public async Task<IActionResult> AddProduct(string productType = null)
-        {
-            var types = await CategoryRepo.GetNotAbstractChildren("product");
-            ViewData["productType"] = productType;
-            return View(types);
-        }
-        [HttpPost]
-         public IActionResult addproduct(IFormCollection data)
-        {
-             //new ProductRepository().GetProducts<Product>("a");
-            return View();
-        }
+   
     
     }
 }
