@@ -2,8 +2,8 @@
 @{
 }
 <form asp-action="AddProduct" enctype="multipart/form-data" method="post">
-    <input type="hidden" name="productType" value="notebook" />
-    <input type="hidden" name="category" value="notebook" />
+    <input type="hidden" name="productType" value="smartphone" />
+    <input type="hidden" name="Category" value="smartphone" />
     <input type="hidden" asp-for="SalerId" value=@ViewData["SalerId"] />
     <div class="form-group">
         <div>
@@ -28,12 +28,6 @@
             <label asp-for="BatteryVolume" class="col-form-label">Battery (Mah): </label>
         </div>
         <input type="text" asp-for="BatteryVolume" class="form-control" />
-    </div>
-    <div class="form-group">
-        <div>
-            <label asp-for="Category" class="col-form-label">Category: </label>
-        </div>
-        <input type="text" asp-for="Category" class="form-control" />
     </div>
     <div class="form-group">
         <div>
