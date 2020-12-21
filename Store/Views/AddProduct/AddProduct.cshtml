@@ -7,6 +7,19 @@
 
     string c = ViewData["productType"]?.ToString();
 }
-@if (ViewData["productType"] is not null) { 
-    @await Html.PartialAsync($"~/Views/Partial/{ViewData["productType"]?.ToString()}.cshtml", new MeatGrinderData())
+@if (ViewData["productType"] is not null) {
+    object data = null;
+    string type = ViewData["productType"].ToString();
+    if (type == "notebook")
+        data = new NotebookData();
+    if (type == "refrigerator")
+        data = new RefrigeratorData();
+    if (type == "meatGrinder")
+        data = new MeatGrinderData();
+    if (type == "smartphone")
+        data = new SmartphoneData();
+    if (type == "vacuumCleaner")
+        data = new VacuumCleanerData();
+
+    @await Html.PartialAsync($"~/Views/Partial/{ViewData["productType"]?.ToString()}.cshtml", data)
 }
