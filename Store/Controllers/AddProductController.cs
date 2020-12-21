@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Store.Data;
+using Store.Models;
+using Store.Models.ProductInfrastructure;
+using Store.Models.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +29,11 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        public IActionResult addproduct(IFormCollection data)
+        public IActionResult addproduct(IFormCollection data,[FromServices] IProductSaver productSaver)
         {
-            if (data["category"].Contains("meatGrinder"))
-                return View();
+            productSaver.Save(data);
             //new ProductRepository().GetProducts<Product>("a");
-            return View();
+            return RedirectToAction(nameof(AddProduct));
         }
     }
 }
