@@ -7,7 +7,6 @@ namespace Store.Models
 {
     public class Product
     {
-        static public string ProductName { get; set; } = "Product";
         public int Id { get; set; }
         public int Cost { get; set; }
         public string Name { get; set; }
