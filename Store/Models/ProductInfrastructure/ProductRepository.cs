@@ -19,13 +19,30 @@ namespace Store.Models
             ConnectionString = connection.ConnectionString;
             Repo = repo;
         }
-        public async Task<List<T>> GetProducts<T>(string category) where T : Product
+        public async Task<List<T>> GetProductsAsync<T>(string category) where T : Product
         {
             SqlConnection conn = new(ConnectionString);
             List<T> result = new();
             foreach (var c in await Repo.GetNotAbstractChildren(category))
                 result.AddRange((await conn.QueryAsync<T>($"select * from products where Category='{c}'")).ToList());
             result.AddRange((await conn.QueryAsync<T>($"select * from products where Category='{category}'")).ToList());
+            return result;
+        }
+
+        public async Task<List<Product>> GetProductsWithSalersAsync(string category) 
+        {
+            SqlConnection conn = new(ConnectionString);
+            var result = (await conn.QueryAsync<Product, User, Product>("exec GetProductsWithSalers;",
+                (product, user) =>
+                {
+                    product.Saler = user;
+                    return product;
+                },
+                splitOn: "UserName"
+                ))
+                .ToList()
+                .Where(p=> p.Category == category ||  Repo.GetChildrenCategories(category).Result.Contains(p.Category))
+                .ToList();
             return result;
         }
     }

@@ -13,10 +13,12 @@ namespace Store.Controllers
     public class ProductController : Controller
     {
         public ICategoryRepository CategoryRepo { get; }
+        public IProductRepository ProductRepository { get; }
 
-        public ProductController(ICategoryRepository categoryRepo)
+        public ProductController(ICategoryRepository categoryRepo, IProductRepository productRepository)
         {
             CategoryRepo = categoryRepo;
+            ProductRepository = productRepository;
         }
         public IActionResult MeatGrinder()
         {
@@ -81,7 +83,11 @@ namespace Store.Controllers
             };
             return View(model);
         }
-   
+        public IActionResult AllProducts(string category)
+        {
+           var result = ProductRepository.GetProductsWithSalersAsync(category ?? "product").Result;
+            return View(result);
+        }
     
     }
 }

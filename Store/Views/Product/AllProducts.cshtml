@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var p in Model)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">parametr</th>
+                <th scope="col">value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src=@p?.Image height="250" width="250" /></td>
+            </tr>
+            <tr>
+                <th scope="row">Model:</th>
+                <td>@p.Name</td>
+            </tr>
+            <tr>
+                <th scope="row">Cost:</th>
+                <td>@p.Cost</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td>@p.Description</td>
+            </tr>
+            <tr>
+                <th scope="row">Saler:</th>
+                <td>
+                <a asp-controller="User" asp-action="ShowUserInfo" asp-route-userId=@p.SalerId>
+                    @p.Saler?.UserName
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+}
