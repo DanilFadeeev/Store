@@ -53,10 +53,14 @@ namespace Store.Controllers
         public async Task<IActionResult> SignUp( SignUpData data, string returnUrl)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(data);
 
          var res =   await UserManager.CreateAsync(data.ToUser());
-
+            if (!res.Succeeded)
+            {
+                ViewData["returnUrl"] = returnUrl;
+                return View(data);
+            }
             return Redirect(returnUrl?? "/");
         }
 
