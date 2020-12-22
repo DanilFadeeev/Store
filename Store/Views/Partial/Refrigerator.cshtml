@@ -1,0 +1,78 @@
+﻿@model RefrigeratorData
+@{
+}
+<form asp-action="AddProduct" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="productType" value="refrigerator" />
+    <input type="hidden" name="Category" value="refrigerator" />
+    <input type="hidden" asp-for="SalerId" value=@ViewData["SalerId"] />
+    <div class="form-group">
+        <div>
+            <label asp-for="Brand" class="col-form-label">Brand: </label>
+        </div>
+        <input type="text" asp-for="Brand" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="Color" class="col-form-label">Color: </label>
+        </div>
+        <input type="text" asp-for="Color" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="Cost" class="col-form-label">Cost: </label>
+        </div>
+        <input type="text" asp-for="Cost" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="Description" class="col-form-label">Description: </label>
+        </div>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="HeightMm" class="col-form-label">Height, mm: </label>
+        </div>
+        <input type="text" asp-for="HeightMm" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="LengthMm" class="col-form-label">Length, mm: </label>
+        </div>
+        <input type="text" asp-for="LengthMm" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="Name" class="col-form-label">Name: </label>
+        </div>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="PowerInWatt" class="col-form-label">Power (in watt): </label>
+        </div>
+        <input type="text" asp-for="PowerInWatt" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="VolumeLiters" class="col-form-label">Volume (liters): </label>
+        </div>
+        <input type="text" asp-for="VolumeLiters" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="WidthMm" class="col-form-label">Width mm: </label>
+        </div>
+        <input type="text" asp-for="WidthMm" class="form-control" />
+    </div>
+    <div class="form-group">
+        <div>
+            <label asp-for="ImageFile" class="col-form-label">Image: </label>
+        </div>
+        <input type="text" asp-for="ImageFile" class="form-control" />
+    </div>
+    <div>
+        <input type="submit" value="Publish" class="btn btn-primary" />
+    </div>
+
+</form>

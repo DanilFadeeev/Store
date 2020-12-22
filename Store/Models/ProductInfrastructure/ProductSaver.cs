@@ -24,14 +24,23 @@ namespace Store.Models.ProductInfrastructure
             PhotoSaver = photoSaver;
             ConnectionStringProvider = connectionStringProvider;
         }
-
-
-        public void Save(IFormCollection data)
+        public void Save(IFormCollection formData)
         {
             Product result=null;
-            if (data["Category"] == "meatGrinder")
-                result = Mapper.Map<MeatGrinder>(data);
-            PhotoSaver.Save(data, result);
+
+            string type = formData["category"].ToString();
+            if (type == "notebook")
+                result = Mapper.Map<Notebook>(formData);
+            if (type == "refrigerator")
+                result = Mapper.Map<Refrigerator>(formData);
+            if (type == "meatGrinder")
+                result = Mapper.Map<MeatGrinder>(formData);
+            if (type == "smartphone")
+                result = Mapper.Map<Smartphone>(formData);
+            if (type == "vacuumCleaner")
+                result = Mapper.Map<VacuumCleaner>(formData);
+
+            PhotoSaver.Save(formData, result);
 
             SqlConnection conn = new(ConnectionStringProvider.ConnectionString);
             conn.Execute(Sql.GetCommand(result), result);

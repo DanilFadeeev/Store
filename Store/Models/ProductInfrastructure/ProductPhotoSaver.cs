@@ -19,6 +19,8 @@ namespace Store.Models.ProductInfrastructure
 
         public void Save(IFormCollection data, Product obj)
         {
+            if (data.Files.Count == 0)
+                return;
             var file = data.Files.First();
 
             string fileName = Guid.NewGuid().ToString();
