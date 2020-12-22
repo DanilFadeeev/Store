@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Store.Data;
@@ -12,19 +14,23 @@ using System.Threading.Tasks;
 
 namespace Store.Controllers
 {
+    [Authorize]
     public class AddProductController:Controller
     {
         public ICategoryRepository CategoryRepo { get; }
+        public UserManager<User> UserManager { get; }
 
-        public AddProductController(ICategoryRepository categoryRepo)
+        public AddProductController(ICategoryRepository categoryRepo, UserManager<User> userManager)
         {
             CategoryRepo = categoryRepo;
+            UserManager = userManager;
         }
         [HttpGet]
         public async Task<IActionResult> AddProduct(string productType = null)
         {
             var types = await CategoryRepo.GetNotAbstractChildren("product");
             ViewData["productType"] = productType;
+            ViewData["SalerId"] = (await UserManager.FindByNameAsync(User.Identity.Name)).UserId;
             return View(types);
         }
 
