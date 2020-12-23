@@ -10,5 +10,6 @@ namespace Store.Models
     {
         Task<List<T>> GetProductsAsync<T>(string category) where T: Product;
         Task<List<Product>> GetProductsWithSalersAsync(string category);
+        Task<Product> GetPRoductById(int productId);
     } 
 }

@@ -17,6 +17,27 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Reflection;
 
+SqlConnection conn = new("server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true");
+var result = conn.Query<Product, User, Product>("exec GetProductsWithSalers;",
+    (product, user) => 
+    {
+        product.Saler = user;
+        return product; 
+    }, 
+    splitOn: "UserName"
+    );
+foreach(var i in result)
+{
+    Console.WriteLine(i.Description);
+    Console.WriteLine(i.SalerId);
+    Console.WriteLine(i.Saler.UserName);
+}
+//var result = new VacuumCleaner();
+//var allProp = result.GetType().GetProperties();
+//var proprety = result.GetType().GetProperty("Category");
+//Console.WriteLine(proprety is null);
+
+
 //SqlConnection conn = new("server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true");
 //MeatGrinder meat = new() 
 //{ 

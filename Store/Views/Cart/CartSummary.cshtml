@@ -1,0 +1,15 @@
+﻿@model Cart
+@{
+}
+@foreach (var i in Model.ProductsWithQuantity)
+{
+    <p>
+        Name: @i.Product.Name
+    </p>
+    <p>
+        Price: @i.Product.Cost
+    </p>
+    <p>
+        Quantity: @i.Quantity
+    </p>
+}    
