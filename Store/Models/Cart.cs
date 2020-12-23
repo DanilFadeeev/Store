@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,21 @@ namespace Store.Models
 {
     public class Cart
     {
-        public static Cart GetCartFromSession(IServiceProvider services)
-        {
-            var session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            Cart result = session.Get<Cart>("Cart") ?? new Cart();
-            return result;
-        }
-        public List<CartItem> Products { get; set; }
-        public void Add(string productId, int quantity)
-        {
 
+        public List<CartItem> ProductsWithQuantity { get; set; }
+        virtual public void Add(Product product, int quantity)
+        {
+            if (ProductsWithQuantity is null)
+                ProductsWithQuantity = new();
+
+            var item = ProductsWithQuantity.Where(ci => ci.Product.Id == product.Id).FirstOrDefault();
+            if (item is null)
+            {
+                item = new();
+                item.Product = product;
+                ProductsWithQuantity.Add(item);
+            }
+            item.Quantity += quantity;
         }
     }
 

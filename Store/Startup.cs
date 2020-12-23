@@ -47,7 +47,7 @@ namespace Store
             services.AddSingleton<IInsertSqlComandProvider, InsertSqlComandProvider>();
             services.AddSingleton<IProductPhotoSaver, ProductPhotoSaver>();
             services.AddSingleton<IProductRepository, ProductRepository>();
-            services.AddScoped<Cart>(sp => Cart.GetCartFromSession(sp));
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 
             services.AddIdentity<User, Role>()
                 .AddDefaultTokenProviders();
@@ -67,7 +67,7 @@ namespace Store
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "", pattern: "{controller=Account}/{action=Login}/{id?}");

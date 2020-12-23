@@ -45,5 +45,12 @@ namespace Store.Models
                 .ToList();
             return result;
         }
+
+        public async Task<Product> GetPRoductById(int productId)
+        {
+            SqlConnection conn = new(ConnectionString);
+            var result = await conn.QuerySingleAsync<Product>($"select * from products where Id = '{productId}'");
+            return result;
+        }
     }
 }
