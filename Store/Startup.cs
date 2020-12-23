@@ -46,9 +46,14 @@ namespace Store
             services.AddSingleton<IProductSaver, ProductSaver>();
             services.AddSingleton<IInsertSqlComandProvider, InsertSqlComandProvider>();
             services.AddSingleton<IProductPhotoSaver, ProductPhotoSaver>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddScoped<Cart>(sp => Cart.GetCartFromSession(sp));
 
             services.AddIdentity<User, Role>()
                 .AddDefaultTokenProviders();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
