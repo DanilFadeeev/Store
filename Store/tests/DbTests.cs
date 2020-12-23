@@ -1,10 +1,14 @@
-﻿using DbUp;
+﻿using Dapper;
+using DbUp;
 using Microsoft.AspNetCore.Identity;
 using Store.Data;
 using Store.Models;
+using Store.Models.ProductInfrastructure;
+using Store.Models.Products;
 using Store.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -176,7 +180,60 @@ namespace Store.tests
             foreach (var i in allConcreteProductChilds)
                 Console.WriteLine(i);
 
+            SqlConnection conn = new("server=.\\sqlexpress;database=shoptest;trusted_connection=true");
+            var result1 = conn.Query<Product, User, Product>("exec getproductswithsalers;",
+                (product, user) =>
+                {
+                    product.Saler = user;
+                    return product;
+                },
+                splitOn: "username"
+                );
+            foreach (var i in result1)
+            {
+                Console.WriteLine(i.Description);
+                Console.WriteLine(i.SalerId);
+                Console.WriteLine(i.Saler.UserName);
+            }
+            var result2 = new VacuumCleaner();
+            var allprop = result.GetType().GetProperties();
+            var proprety = result.GetType().GetProperty("category");
+            Console.WriteLine(proprety is null);
 
+
+            conn = new("server=.\\sqlexpress;database=shoptest;trusted_connection=true");
+            MeatGrinder meat = new()
+            {
+                Brand = "toshiba",
+                Category = "meatgrinder",
+                Description = "vah good perfect",
+                Cost = 1000,
+                SalerId = "a",
+                Name = "destructoir 3000"
+            };
+            object test1 = meat;
+            string sql = new InsertSqlComandProvider().GetCommand(test1);
+            int result3 = conn.Execute(sql, test1);
+            if (result3 == 1)
+                Console.WriteLine("comand executed successfuly");
+            else
+                Console.WriteLine("something went wrong");
+
+
+            //dbtests.run();
+
+            foreach (var i in new MeatGrinder().GetType().GetProperties())
+                Console.WriteLine(i.Name);
+
+
+
+        var repo2 = new ProductRepository(new csp(), new CategoryRepository(new csp(), new CategoryTreeProvider(new csp())));
+        var product = repo2.GetProductWithSalerById(2).Result;
+            Console.WriteLine(product.Category);
+            Console.WriteLine(product.Name);
+            Console.WriteLine(product.Cost);
+            Console.WriteLine(product.Saler.UserId);
+            Console.WriteLine(product.Saler.UserName);
 
         }
         class csp : IConnectionStringProvider
