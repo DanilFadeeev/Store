@@ -50,6 +50,7 @@
     <None Remove="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
     <None Remove="Data\Migrations\0021AddColumnsToProductsTable.sql" />
     <None Remove="Data\Migrations\0022AddImageColumnToProducts.sql" />
+    <None Remove="Data\Migrations\0023CreateGetProductsWithSalersProcedure.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +76,7 @@
     <EmbeddedResource Include="Data\Migrations\0020AddColumnsForNewProductTypes.sql" />
     <EmbeddedResource Include="Data\Migrations\0021AddColumnsToProductsTable.sql" />
     <EmbeddedResource Include="Data\Migrations\0022AddImageColumnToProducts.sql" />
+    <EmbeddedResource Include="Data\Migrations\0023CreateGetProductsWithSalersProcedure.sql" />
   </ItemGroup>
 
   <ItemGroup>
