@@ -17,59 +17,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Reflection;
 
-SqlConnection conn = new("server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true");
-var result = conn.Query<Product, User, Product>("exec GetProductsWithSalers;",
-    (product, user) => 
-    {
-        product.Saler = user;
-        return product; 
-    }, 
-    splitOn: "UserName"
-    );
-foreach(var i in result)
-{
-    Console.WriteLine(i.Description);
-    Console.WriteLine(i.SalerId);
-    Console.WriteLine(i.Saler.UserName);
-}
-//var result = new VacuumCleaner();
-//var allProp = result.GetType().GetProperties();
-//var proprety = result.GetType().GetProperty("Category");
-//Console.WriteLine(proprety is null);
-
-
-//SqlConnection conn = new("server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true");
-//MeatGrinder meat = new() 
-//{ 
-//    Brand = "toshiba",
-//    Category = "meatGrinder", 
-//    Description = "vah good perfect",
-//    Cost = 1000, SalerId = "a",
-//    Name = "Destructoir 3000" 
-//};
-//object test = meat;
-//string sql = new InsertSqlComandProvider().GetCommand(test);
-//int result = conn.Execute(sql, test);
-//if (result == 1)
-//    Console.WriteLine("comand executed successfuly");
-//else
-//    Console.WriteLine("something went wrong");
-
-
-////DbTests.Run();
-
-//foreach(var i in new MeatGrinder().GetType().GetProperties())
-//    Console.WriteLine(i.Name);
-
-//var repo = new ProductRepository(new csp(),new CategoryRepository(new csp(), new CategoryTreeProvider(new csp())));
-//var products = repo.GetProducts<Product>("product").Result;
-//foreach(var i in products)
-//    Console.WriteLine(i.Description);
-
-//class csp : IConnectionStringProvider
-//{
-//    public string ConnectionString => "server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true";
-//}
 
 CreateHostBuilder(args).Build().Run();
 
@@ -80,4 +27,8 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         {
             webBuilder.UseStartup<Startup>();
         });
+class csp : IConnectionStringProvider
+{
+    public string ConnectionString => "server=.\\SQLEXPRESS;database=ShopTest;Trusted_Connection=true";
+}
 

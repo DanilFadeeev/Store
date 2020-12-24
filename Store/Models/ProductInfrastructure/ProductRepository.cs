@@ -52,5 +52,21 @@ namespace Store.Models
             var result = await conn.QuerySingleAsync<Product>($"select * from products where Id = '{productId}'");
             return result;
         }
+
+        public async Task<Product> GetProductWithSalerById(int productId)
+        {
+            SqlConnection conn = new(ConnectionString);
+            var result = (await conn.QueryAsync<Product, User, Product>($"exec GetProductWithSalerByProductId {productId}",
+                (product, user) =>
+                {
+                    product.Saler = user;
+                    return product;
+                },
+                splitOn: "UserName"
+                )).FirstOrDefault();
+            return result;
+        }
+
+
     }
 }
