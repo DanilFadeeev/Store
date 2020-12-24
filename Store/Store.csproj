@@ -51,6 +51,7 @@
     <None Remove="Data\Migrations\0021AddColumnsToProductsTable.sql" />
     <None Remove="Data\Migrations\0022AddImageColumnToProducts.sql" />
     <None Remove="Data\Migrations\0023CreateGetProductsWithSalersProcedure.sql" />
+    <None Remove="Data\Migrations\0024AddGetProductWithSalerByProductIdStoredProcedure.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +78,7 @@
     <EmbeddedResource Include="Data\Migrations\0021AddColumnsToProductsTable.sql" />
     <EmbeddedResource Include="Data\Migrations\0022AddImageColumnToProducts.sql" />
     <EmbeddedResource Include="Data\Migrations\0023CreateGetProductsWithSalersProcedure.sql" />
+    <EmbeddedResource Include="Data\Migrations\0024AddGetProductWithSalerByProductIdStoredProcedure.sql" />
   </ItemGroup>
 
   <ItemGroup>
