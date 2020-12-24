@@ -24,7 +24,14 @@ namespace Store.Models
                 item.Product = product;
                 ProductsWithQuantity.Add(item);
             }
-            item.Quantity += quantity;
+                item.Quantity += quantity;
+            if (item.Quantity <= 0)
+                RemoveItem(item.Product);
+        }
+        virtual public void RemoveItem(Product product)
+        {
+            var cartItem = ProductsWithQuantity.Where(ci => ci.Product.Id == product.Id).FirstOrDefault();
+            ProductsWithQuantity.Remove(cartItem);
         }
     }
 
