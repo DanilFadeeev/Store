@@ -1,7 +1,7 @@
 ﻿@model Cart
 @{
 }
-@foreach (var i in Model.ProductsWithQuantity)
+@foreach (var i in Model.ProductsWithQuantity?? new())
 {
     <p>
         Name: @i.Product.Name

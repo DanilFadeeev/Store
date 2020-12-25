@@ -37,3 +37,8 @@
         </tr>
     </tbody>
 </table>
+<a asp-action="AddToCart" asp-controller="Cart"
+   asp-route-productId=@Model.Id
+   asp-route-quantity="1"
+   asp-route-returnUrl=@Context.Request.PathAndQuery()
+   class="btn btn-primary">add to cart</a>
