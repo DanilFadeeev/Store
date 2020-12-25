@@ -6,6 +6,16 @@
     <title></title>
 </head>
 <body>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <a asp-controller="User" asp-action="ShowUserInfo" asp-route-userName="@User.Identity.Name">Welcome, @User.Identity.Name</a>
+    <a asp-controller="AddProduct" asp-action="AddProduct">Add own product</a>
+    }
+    else 
+    { 
+        <a asp-controller="Account" asp-action="Login">Login</a>
+        <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
+    }
     @RenderBody()
 </body>
 </html>
