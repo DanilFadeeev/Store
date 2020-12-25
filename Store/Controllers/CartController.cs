@@ -16,18 +16,22 @@ namespace Store.Controllers
 
         public IProductRepository ProductRepository { get; }
 
-        public IActionResult AddToCart(int productId, int quantity,[FromServices] Cart cartService)
+        public IActionResult AddToCart(int productId, int quantity, string returnUrl, [FromServices] Cart cartService)
         {
             var isSessionCart = cartService is SessionCart;
             var product = ProductRepository.GetProductById(productId).Result;
             cartService.Add(product, quantity);
-            return View("CartSummary", cartService);
+            return Redirect(returnUrl??"/");
         }
-        public IActionResult RemoveFromCart(int productId, [FromServices] Cart cartService)
+        public IActionResult RemoveFromCart(int productId, string returnUrl, [FromServices] Cart cartService)
         {
             var isSessionCart = cartService is SessionCart;
             var product = ProductRepository.GetProductById(productId).Result;
             cartService.RemoveItem(product);
+            return Redirect(returnUrl ?? "/");
+        }
+        public IActionResult CartSummary([FromServices] Cart cartService)
+        {
             return View("CartSummary", cartService);
         }
     }
