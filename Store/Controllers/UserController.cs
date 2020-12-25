@@ -16,7 +16,6 @@ namespace Store.Controllers
             UserManager = userManager;
         }
 
-
         public IActionResult ShowUserInfo(string userName)
         {
             var user = UserManager.FindByNameAsync(userName).Result;

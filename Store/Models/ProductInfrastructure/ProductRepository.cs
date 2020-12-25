@@ -46,13 +46,18 @@ namespace Store.Models
             return result;
         }
 
-        public async Task<Product> GetPRoductById(int productId)
+        public async Task<Product> GetProductById(int productId)
         {
             SqlConnection conn = new(ConnectionString);
             var result = await conn.QuerySingleAsync<Product>($"select * from products where Id = '{productId}'");
             return result;
         }
-
+        public async Task<T> GetProductById<T>(int productId)
+        {
+            SqlConnection conn = new(ConnectionString);
+            var result = await conn.QuerySingleAsync<T>($"select * from products where Id = '{productId}'");
+            return result;
+        }
         public async Task<Product> GetProductWithSalerById(int productId)
         {
             SqlConnection conn = new(ConnectionString);

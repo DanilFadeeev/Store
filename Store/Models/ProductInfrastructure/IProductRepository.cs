@@ -10,7 +10,8 @@ namespace Store.Models
     {
         Task<List<T>> GetProductsAsync<T>(string category) where T: Product;
         Task<List<Product>> GetProductsWithSalersAsync(string category);
-        Task<Product> GetPRoductById(int productId);
+        Task<Product> GetProductById(int productId);
+        Task<T> GetProductById<T>(int productId);
         Task<Product> GetProductWithSalerById(int productId);
     }
 }
