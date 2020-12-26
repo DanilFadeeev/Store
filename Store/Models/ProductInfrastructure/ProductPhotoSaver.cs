@@ -31,7 +31,7 @@ namespace Store.Models.ProductInfrastructure
             using (FileStream fs = new(fullPath, FileMode.Create))
                 file.CopyToAsync(fs).Wait();
 
-            obj.Image = fullPath;
+            obj.Image = $"\\Images\\" + fileName + extension;
         }
     }
 }
