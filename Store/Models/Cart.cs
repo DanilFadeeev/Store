@@ -33,6 +33,10 @@ namespace Store.Models
             var cartItem = ProductsWithQuantity.Where(ci => ci.Product.Id == product.Id).FirstOrDefault();
             ProductsWithQuantity.Remove(cartItem);
         }
+        virtual public void Clear()
+        {
+            ProductsWithQuantity.Clear();
+        }
     }
 
     public class CartItem

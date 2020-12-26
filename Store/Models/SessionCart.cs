@@ -22,6 +22,11 @@ namespace Store.Models
             base.Add(product, quantity);
             Session.Set("cart", this);
         }
+        public override void Clear()
+        {
+            base.Clear();
+            Session.Set("cart", this);
+        }
         [JsonIgnore]
         public ISession Session { get; set; }
     }
