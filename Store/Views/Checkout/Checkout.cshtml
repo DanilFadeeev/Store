@@ -38,7 +38,7 @@
         </div>
         <input type="text" asp-for="Comment" class="form-control" />
     </div>
-    @await Html.PartialAsync("~/Views/Cart/CartSummary.cshtml", Model?.Cart ?? new())
+    @await Html.PartialAsync("~/Views/Cart/CartSummaryPartial.cshtml", Model?.Cart ?? new())
     <div>
         <input type="submit" value="Publish" class="btn btn-primary" />
     </div>
