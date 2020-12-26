@@ -70,7 +70,7 @@ namespace Store
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "", pattern: "{controller=Account}/{action=Login}/{id?}");
+                endpoints.MapControllerRoute(name: "", pattern: "{controller=Product}/{action=AllProducts}/{id?}");
             });
         }
     }
