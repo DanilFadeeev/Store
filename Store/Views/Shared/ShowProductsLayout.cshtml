@@ -17,37 +17,8 @@
         <a asp-controller="Account" asp-action="Login">Login</a>
         <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
     }
-    <ol>
-        <li><a asp-controller="Product" asp-action="AllProducts" asp-route-category="product">All</a></li>
-        <li>
-            <a asp-controller="Product" asp-action="AllProducts" asp-route-category="applaniess">Appliance</a>
-            <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
-                <li style="margin-left:2em">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="meatGrinder">MEat Grinders</a>
-                </li>
-                <li style="margin-left:2em; padding-bottom: 0;">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="refrigerator">refrigerators</a>
-                </li>
-                <li style="margin-left:2em; padding-bottom: 0;">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="vacuumCleaner">Vacuum cleaners</a>
-                </li>
-            </ol>
+    @await Html.PartialAsync("~/Views/Partial/CategoryList.cshtml")
 
-            <a asp-controller="Product" asp-action="AllProducts" asp-route-category="electronics">Electronics</a>
-            <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
-                <li style="margin-left:2em">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="notebook">Notebooks</a>
-                </li>
-                <li style="margin-left:2em; padding-bottom: 0;">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="smartphone">Smartphones</a>
-                </li>
-                <li style="margin-left:2em; padding-bottom: 0;">
-                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="vacuumCleaner">Vacuum cleaners</a>
-                </li>
-            </ol>
-
-        </li>
-    </ol>
     @RenderBody()
 </body>
 </html>

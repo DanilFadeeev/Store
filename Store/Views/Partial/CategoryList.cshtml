@@ -1,0 +1,23 @@
+﻿@inject ICategoryTreeProvider categoryTree
+@{
+    async Task drawCategory(Category category)
+    {
+        if (category is null)
+            return;
+
+    <li><a asp-action="AllProducts" asp-route-category=@category.Name>@category.Name</a></li>
+
+        if (category.Children is null || category.Children.Count is 0)
+            return;
+
+        <ol>
+            @foreach (var i in category.Children)
+            {
+                await drawCategory(i);
+            }
+        </ol>
+    }
+}
+@{
+    drawCategory(categoryTree.Root).Wait();
+        }
