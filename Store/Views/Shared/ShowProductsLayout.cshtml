@@ -8,15 +8,46 @@
 <body>
     @if (User.Identity.IsAuthenticated)
     {
-    <a asp-controller="User" asp-action="ShowUserInfo" asp-route-userName="@User.Identity.Name">Welcome, @User.Identity.Name</a>
-    <a asp-controller="AddProduct" asp-action="AddProduct">Add own product</a>
-    <a asp-controller="Cart" asp-action="CartSummary">Cart</a>
+        <a asp-controller="User" asp-action="ShowUserInfo" asp-route-userName="@User.Identity.Name">Welcome, @User.Identity.Name</a>
+        <a asp-controller="AddProduct" asp-action="AddProduct">Add own product</a>
+        <a asp-controller="Cart" asp-action="CartSummary">Cart</a>
     }
-    else 
-    { 
+    else
+    {
         <a asp-controller="Account" asp-action="Login">Login</a>
         <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
     }
+    <ol>
+        <li><a asp-controller="Product" asp-action="AllProducts" asp-route-category="product">All</a></li>
+        <li>
+            <a asp-controller="Product" asp-action="AllProducts" asp-route-category="applaniess">Appliance</a>
+            <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                <li style="margin-left:2em">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="meatGrinder">MEat Grinders</a>
+                </li>
+                <li style="margin-left:2em; padding-bottom: 0;">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="refrigerator">refrigerators</a>
+                </li>
+                <li style="margin-left:2em; padding-bottom: 0;">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="vacuumCleaner">Vacuum cleaners</a>
+                </li>
+            </ol>
+
+            <a asp-controller="Product" asp-action="AllProducts" asp-route-category="electronics">Electronics</a>
+            <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                <li style="margin-left:2em">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="notebook">Notebooks</a>
+                </li>
+                <li style="margin-left:2em; padding-bottom: 0;">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="smartphone">Smartphones</a>
+                </li>
+                <li style="margin-left:2em; padding-bottom: 0;">
+                    <a asp-controller="Product" asp-action="AllProducts" asp-route-category="vacuumCleaner">Vacuum cleaners</a>
+                </li>
+            </ol>
+
+        </li>
+    </ol>
     @RenderBody()
 </body>
 </html>
